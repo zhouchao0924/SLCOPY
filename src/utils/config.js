@@ -12,7 +12,7 @@ module.exports = {
 	api: {
 		userLogin: '/user/login',
 		userLogout: '/user/logout',
-		userInfo: '/userInfo',
+		userInfo: '/user/isLogin',
 		users: '/users',
 		dashboard: '/dashboard'
 	}

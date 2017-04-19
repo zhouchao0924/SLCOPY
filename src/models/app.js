@@ -16,7 +16,7 @@ export default {
 	},
 	subscriptions : {
 		setup({dispatch}) {
-			// dispatch({type: 'queryUser'})
+			dispatch({type: 'queryUser'})
 			window.onresize = () => {
 				dispatch({type: 'changeNavbar'})
 			}
@@ -27,8 +27,8 @@ export default {
 			payload
 		}, {call, put}) {
 			const data = yield call(getUserInfo, parse(payload))
-			if (data.success && data.user) {
-				yield put({type: 'queryUserSuccess', payload: data.user})
+			if (data.success && data.data.userName) {
+				yield put({type: 'queryUserSuccess', payload: data.data.userName})
 				if (location.pathname === '/login') {
 					yield put(routerRedux.push('/dashboard'))
 				}

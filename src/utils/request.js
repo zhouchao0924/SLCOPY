@@ -4,6 +4,7 @@ import {YQL, CORS, baseURL} from './config'
 import jsonp from 'jsonp'
 import lodash from 'lodash'
 axios.defaults.baseURL = baseURL
+axios.defaults.withCredentials = true
 const fetch = (options) => {
 	let {
 		method = 'get',
