@@ -16,7 +16,7 @@ export default {
 	},
 	subscriptions : {
 		setup({dispatch}) {
-			dispatch({type: 'queryUser'})
+			// dispatch({type: 'queryUser'})
 			window.onresize = () => {
 				dispatch({type: 'changeNavbar'})
 			}

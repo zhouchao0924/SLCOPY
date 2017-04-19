@@ -29,7 +29,7 @@ const Login = ({
 			</div>
 			<form>
 				<FormItem hasFeedback>
-					{getFieldDecorator('username', {
+					{getFieldDecorator('userName', {
 						rules: [
 							{
 								required: true,
@@ -52,10 +52,6 @@ const Login = ({
 					<Button type="primary" size="large" onClick={handleOk} loading={loginLoading}>
 						登录
 					</Button>
-					<p>
-						<span>账号：guest</span>
-						<span>密码：guest</span>
-					</p>
 				</Row>
 			</form>
 		</div>
