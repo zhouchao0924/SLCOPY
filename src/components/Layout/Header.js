@@ -15,7 +15,6 @@ function Header({
 	navOpenKeys,
 	changeOpenKeys
 }) {
-	console.log(user);
 	let handleClickMenu = e => e.key === 'logout' && logout()
 	const menusProps = {
 		siderFold: false,
@@ -49,7 +48,7 @@ function Header({
 					<SubMenu style={{
 						float: 'right'
 					}} title={< span > <Icon type="user"/>
-						{user.username} < /span>}>
+						{user.userName} < /span>}>
 						<Menu.Item key="logout">
 							<a>注销</a>
 						</Menu.Item>

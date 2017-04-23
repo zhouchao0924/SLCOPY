@@ -14,6 +14,6 @@ module.exports = {
 		userLogout: '/user/logout',
 		userInfo: '/user/isLogin',
 		users: '/users',
-		dashboard: '/dashboard'
+		dashboard: '/user/getManageArea'
 	}
 }
