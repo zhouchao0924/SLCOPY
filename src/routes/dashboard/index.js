@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {connect} from 'dva'
-import {Select} from 'antd';
+import {Select, Card, Col, Row, Button} from 'antd';
 import styles from './index.less'
 const bodyStyle = {
 	bodyStyle: {
@@ -9,14 +9,30 @@ const bodyStyle = {
 	}
 }
 function Dashboard({dashboard}) {
+	const ToYYTown = (e) => {
+		console.log(e);
+	}
 	const {Citylist} = dashboard;
-	return (
-		<Select style={{
-			width: 100
-		}}>
-			{Citylist && Citylist.map((item, key) => <Select.Option value={item.id} key={key}>{item.name || item.id}</Select.Option>)}
-		</Select>
-	)
+	return (< div > < Row gutter = {
+		24
+	} > {
+		Citylist && Citylist.map((item, key) => < Col lg = {
+			4
+		}
+		md = {
+			24
+		}
+		key = {
+			key
+		} > < Button type = "primary" className = {
+			styles.areaButton
+		}
+		onClick = {
+			ToYYTown.bind(this, item.id)
+		} > {
+			item.name
+		} < /Button> < /Col >)
+	} < /Row> < /div >)
 }
 Dashboard.propTypes = {
 	dashboard: PropTypes.object
