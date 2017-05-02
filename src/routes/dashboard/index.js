@@ -12,9 +12,10 @@ function Dashboard({dashboard}) {
 		<div>
 			<Row gutter = {24}>
 				{Citylist && Citylist.map((item, key) =>
-				<Col lg = {4} md = {24} key = {key}>
-					<Button type = "primary" className = {styles.areaButton} onClick = {ToYYTown.bind(this, item.id)} > {item.name}</Button>
-				</Col>)}
+					<Col lg = {4} md = {24} key = {key}>
+						<Button type = "primary" className = {styles.areaButton} onClick = {ToYYTown.bind(this, item.id)} > {item.name}</Button>
+					</Col>)
+				}
 			</Row>
 		</div>
 	);
