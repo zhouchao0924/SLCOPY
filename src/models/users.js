@@ -26,9 +26,7 @@ export default {
 		}
 	},
 	effects : {
-		*query({
-			payload
-		}, {call, put}) {
+		*query({payload}, {call, put}) {
 			const data = yield call(query, parse(payload))
 			if (data) {
 				yield put({
@@ -39,9 +37,8 @@ export default {
 					}
 				})
 			}
-		}, * 'delete' ({
-			payload
-		}, {call, put}) {
+		},
+		* 'delete' ({payload}, {call, put}) {
 			const data = yield call(remove, {id: payload});
 			if (data && data.success) {
 				yield put({
@@ -56,9 +53,7 @@ export default {
 				})
 			}
 		},
-		*create({
-			payload
-		}, {call, put}) {
+		*create({payload}, {call, put}) {
 			yield put({type: 'hideModal'})
 			const data = yield call(create, payload)
 			if (data && data.success) {
@@ -74,9 +69,7 @@ export default {
 				})
 			}
 		},
-		*update({
-			payload
-		}, {select, call, put}) {
+		*update({payload}, {select, call, put}) {
 			yield put({type: 'hideModal'})
 			const id = yield select(({users}) => users.currentItem.id)
 			const newUser = {
@@ -97,9 +90,7 @@ export default {
 				})
 			}
 		},
-		*switchIsMotion({
-			payload
-		}, {put}) {
+		*switchIsMotion({payload}, {put}) {
 			yield put({type: 'handleSwitchIsMotion'})
 		}
 	},

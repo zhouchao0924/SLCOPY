@@ -17,15 +17,11 @@ export default {
 	subscriptions : {
 		setup({dispatch}) {
 			dispatch({type: 'queryUser'})
-			window.onresize = () => {
-				dispatch({type: 'changeNavbar'})
-			}
+			window.onresize = () => {dispatch({type: 'changeNavbar'})}
 		}
 	},
 	effects : {
-		*queryUser({
-			payload
-		}, {call, put}) {
+		*queryUser({payload}, {call, put}) {
 			const data = yield call(getUserInfo, parse(payload))
 			if (data.success && data.data) {
 				yield put({type: 'queryUserSuccess', payload: data.data})
@@ -42,9 +38,7 @@ export default {
 				}
 			}
 		},
-		*logout({
-			payload
-		}, {call, put}) {
+		*logout({payload}, {call, put}) {
 			const data = yield call(logout, parse(payload))
 			if (data.success) {
 				yield put({type: 'queryUser'})
@@ -52,28 +46,20 @@ export default {
 				throw(data)
 			}
 		},
-		*switchSider({
-			payload
-		}, {put}) {
+		*switchSider({payload}, {put}) {
 			yield put({type: 'handleSwitchSider'})
 		},
-		*changeTheme({
-			payload
-		}, {put}) {
+		*changeTheme({payload}, {put}) {
 			yield put({type: 'handleChangeTheme'})
 		},
-		*changeNavbar({
-			payload
-		}, {put}) {
+		*changeNavbar({payload}, {put}) {
 			if (document.body.clientWidth < 769) {
 				yield put({type: 'showNavbar'})
 			} else {
 				yield put({type: 'hideNavbar'})
 			}
 		},
-		*switchMenuPopver({
-			payload
-		}, {put}) {
+		*switchMenuPopver({payload}, {put}) {
 			yield put({type: 'handleSwitchMenuPopver'})
 		}
 	},

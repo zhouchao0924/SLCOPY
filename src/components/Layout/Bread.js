@@ -3,6 +3,7 @@ import {Breadcrumb, Icon} from 'antd'
 import {Link} from 'dva/router'
 import styles from './Bread.less'
 import {menu} from '../../utils'
+
 let pathSet = []
 const getPathSet = function(menuArray, parentPath) {
 	parentPath = parentPath || '/'
@@ -18,7 +19,9 @@ const getPathSet = function(menuArray, parentPath) {
 		}
 	})
 }
+
 getPathSet(menu)
+
 function Bread({location}) {
 	let pathNames = []
 	location.pathname.substr(1).split('/').forEach((item, key) => {
@@ -31,18 +34,14 @@ function Bread({location}) {
 	const breadsArray = pathNames.filter(item => (item in pathSet))
 	const breads = breadsArray.map((item, key) => {
 		const content = (
-			<span>{pathSet[item].icon
-					? <Icon type={pathSet[item].icon} style={{
-							marginRight: 4
-						}}/>
-					: ''}{pathSet[item].name}</span>
+			<span>
+				{pathSet[item].icon?<Icon type={pathSet[item].icon} style={{marginRight: 4}}/>: ''}{pathSet[item].name}
+			</span>
 		)
 		return (
 			<Breadcrumb.Item key={key}>
 				{((breadsArray.length - 1) !== key && pathSet[item].clickable)
-					? <Link to={pathSet[item].path}>
-							{content}
-						</Link>
+					? <Link to={pathSet[item].path}>{content}</Link>
 					: content}
 			</Breadcrumb.Item>
 		)

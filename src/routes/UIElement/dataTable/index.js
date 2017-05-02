@@ -130,29 +130,29 @@ class DataTablePage extends React.Component {
 				}}>Props</h2>
 				<Row>
 					<Col lg={18} md={24}>
-						<Table rowKey={(record, key) => key} pagination={false} bordered scroll={{
-							x: 800
-						}} columns={[
-							{
-								title: '参数',
-								dataIndex: 'props'
-							}, {
-								title: '说明',
-								dataIndex: 'desciption'
-							}, {
-								title: '类型',
-								dataIndex: 'type'
-							}, {
-								title: '默认值',
-								dataIndex: 'default'
-							}
-						]} dataSource={[{
-								props: 'fetch',
-								desciption: '远程获取数据的参数',
-								type: 'Object',
-								default: '后面有空加上'
-							}
-						]}/>
+						<Table rowKey={(record, key) => key} pagination={false} bordered scroll={{x: 800}}
+							columns={[
+								{
+									title: '参数',
+									dataIndex: 'props'
+								}, {
+									title: '说明',
+									dataIndex: 'desciption'
+								}, {
+									title: '类型',
+									dataIndex: 'type'
+								}, {
+									title: '默认值',
+									dataIndex: 'default'
+								}
+							]}
+							dataSource={[{
+									props: 'fetch',
+									desciption: '远程获取数据的参数',
+									type: 'Object',
+									default: '后面有空加上'
+								}
+							]}/>
 					</Col>
 				</Row>
 			</div>

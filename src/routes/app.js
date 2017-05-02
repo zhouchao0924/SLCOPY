@@ -6,14 +6,7 @@ import {Helmet} from 'react-helmet'
 import '../themes/index.less'
 const {Header, Bread, Footer, Sider, styles} = Layout
 const App = ({children, location, dispatch, app}) => {
-	const {
-		user,
-		siderFold,
-		darkTheme,
-		isNavbar,
-		menuPopoverVisible,
-		navOpenKeys
-	} = app
+	const {user,siderFold,darkTheme,isNavbar,menuPopoverVisible,navOpenKeys} = app
 	const headerProps = {
 		user,
 		siderFold,
@@ -33,9 +26,7 @@ const App = ({children, location, dispatch, app}) => {
 		changeOpenKeys(openKeys) {
 			dispatch({
 				type: 'app/handleNavOpenKeys',
-				payload: {
-					navOpenKeys: openKeys
-				}
+				payload: {navOpenKeys: openKeys}
 			})
 		}
 	}
@@ -51,9 +42,7 @@ const App = ({children, location, dispatch, app}) => {
 			localStorage.setItem('navOpenKeys', JSON.stringify(openKeys))
 			dispatch({
 				type: 'app/handleNavOpenKeys',
-				payload: {
-					navOpenKeys: openKeys
-				}
+				payload: {navOpenKeys: openKeys}
 			})
 		}
 	}
@@ -65,24 +54,15 @@ const App = ({children, location, dispatch, app}) => {
 			<Helmet>
 				<title>ANTD ADMIN</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				<link rel="icon" href={config.logoSrc} type="image/x-icon"/> {config.iconFontUrl
-					? <script src={config.iconFontUrl}></script>
-					: ''}
+				<link rel="icon" href={config.logoSrc} type="image/x-icon"/> {config.iconFontUrl?<script src={config.iconFontUrl}></script>: ''}
 			</Helmet>
-			<div className={classnames(styles.layout, {
-				[styles.fold]: isNavbar
-					? false
-					: siderFold
-			}, {
-				[styles.withnavbar]: isNavbar
-			})}>
+			<div className={classnames(styles.layout, {[styles.fold]:isNavbar?false:siderFold},{[styles.withnavbar]:isNavbar})}>
 				{!isNavbar
-					? <aside className={classnames(styles.sider, {
-							[styles.light]: !darkTheme
-						})}>
-							<Sider {...siderProps}/>
-						</aside>
-					: ''}
+					?<aside className={classnames(styles.sider, {[styles.light]:!darkTheme})}>
+						<Sider {...siderProps}/>
+					</aside>
+					: ''
+				}
 				<div className={styles.main}>
 					<Header {...headerProps}/>
 					<Bread location={location}/>

@@ -2,22 +2,15 @@ import React, {PropTypes} from 'react'
 import {Menu, Icon} from 'antd'
 import {Link} from 'dva/router'
 import {menu} from '../../utils'
+
 const topMenus = menu.map(item => item.key)
 const getMenus = function(menuArray, siderFold, parentPath = '/') {
 	return menuArray.map(item => {
 		const linkTo = parentPath + item.key
 		if (item.child) {
 			return (
-				<Menu.SubMenu key={linkTo} title={< span > {
-					item.icon
-						? <Icon type={item.icon}/>
-						: ''
-				}
-				{
-					siderFold && topMenus.indexOf(item.key) >= 0
-						? ''
-						: item.name
-				} < /span>}>
+				<Menu.SubMenu key={linkTo} title={< span > {item.icon? <Icon type={item.icon}/>: ''}
+					{siderFold && topMenus.indexOf(item.key) >= 0? '': item.name}</span>}>
 					{getMenus(item.child, siderFold, `${linkTo}/`)}
 				</Menu.SubMenu>
 			)
@@ -25,25 +18,15 @@ const getMenus = function(menuArray, siderFold, parentPath = '/') {
 		return (
 			<Menu.Item key={linkTo}>
 				<Link to={linkTo}>
-					{item.icon
-						? <Icon type={item.icon}/>
-						: ''}
-					{siderFold && topMenus.indexOf(item.key) >= 0
-						? ''
-						: item.name}
+					{item.icon? <Icon type={item.icon}/>: ''}
+					{siderFold && topMenus.indexOf(item.key) >= 0? '':item.name}
 				</Link>
 			</Menu.Item>
 		)
 	})
 }
-function Menus({
-	siderFold,
-	darkTheme,
-	location,
-	handleClickNavMenu,
-	navOpenKeys,
-	changeOpenKeys
-}) {
+
+function Menus({siderFold,darkTheme,location,handleClickNavMenu,navOpenKeys,changeOpenKeys}) {
 	const menuItems = getMenus(menu, siderFold)
 	const getAncestorKeys = (key) => {
 		const map = {
@@ -63,24 +46,18 @@ function Menus({
 		}
 		changeOpenKeys(nextOpenKeys)
 	}
-	let menuProps = !siderFold
-		? {
-			onOpenChange,
-			openKeys: navOpenKeys
-		}
-		: {}
+	let menuProps = !siderFold? {onOpenChange,openKeys: navOpenKeys}: {}
 	return (
-		<Menu {...menuProps} mode={siderFold
-			? 'vertical'
-			: 'inline'} theme={darkTheme
-			? 'dark'
-			: 'light'} onClick={handleClickNavMenu} defaultSelectedKeys={[location.pathname !== '/'
-				? location.pathname
-				: '/dashboard']}>
+		<Menu {...menuProps}
+			mode={siderFold? 'vertical': 'inline'}
+			theme={darkTheme? 'dark': 'light'}
+			onClick={handleClickNavMenu}
+			defaultSelectedKeys={[location.pathname !== '/'? location.pathname: '/dashboard']}>
 			{menuItems}
 		</Menu>
 	)
 }
+
 Menus.propTypes = {
 	siderFold: PropTypes.bool,
 	darkTheme: PropTypes.bool,
@@ -90,4 +67,5 @@ Menus.propTypes = {
 	navOpenKeys: PropTypes.array,
 	changeOpenKeys: PropTypes.func
 }
+
 export default Menus

@@ -1,15 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Row, Col, Card, Button } from 'antd'
 import Container from '../Container'
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from 'recharts'
+import {BarChart,Bar,XAxis,YAxis,CartesianGrid,Tooltip,Legend,} from 'recharts'
 
 const data = [
   {
@@ -88,138 +80,116 @@ const mixData = [
     male: 2100,
   },
 ]
-const colProps = {
-  lg: 12,
-  md: 24,
-}
+const colProps = {lg: 12,md: 24,}
 
 const SimpleBarChart = () => (
-  <Container>
-    <BarChart data={data} margin={{
-      top: 5,
-      right: 30,
-      left: 20,
-      bottom: 5,
-    }}>
-      <XAxis dataKey="name" />
-      <YAxis />
-      <CartesianGrid strokeDasharray="3 3" />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" fill="#8884d8" />
-      <Bar dataKey="uv" fill="#82ca9d" />
-    </BarChart>
-  </Container>
+    <Container>
+        <BarChart data={data} margin={{top: 5,right: 30,left: 20,bottom: 5,}}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="pv" fill="#8884d8" />
+            <Bar dataKey="uv" fill="#82ca9d" />
+        </BarChart>
+    </Container>
 )
 
 const StackedBarChart = () => (
-  <Container>
-    <BarChart data={data} margin={{
-      top: 20,
-      right: 30,
-      left: 20,
-      bottom: 5,
-    }}>
-      <XAxis dataKey="name" />
-      <YAxis />
-      <CartesianGrid strokeDasharray="3 3" />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-      <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
-    </BarChart>
-  </Container>
+    <Container>
+        <BarChart data={data} margin={{top: 20,right: 30,left: 20,bottom: 5,}}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="pv" stackId="a" fill="#8884d8" />
+            <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+        </BarChart>
+    </Container>
 )
 
 const MixBarChart = () => (
-  <Container>
-    <BarChart data={mixData} margin={{
-      top: 20,
-      right: 30,
-      left: 20,
-      bottom: 5,
-    }}>
-      <XAxis dataKey="name" />
-      <YAxis />
-      <CartesianGrid strokeDasharray="3 3" />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="female" stackId="a" fill="#8884d8" />
-      <Bar dataKey="male" stackId="a" fill="#82ca9d" />
-      <Bar dataKey="uv" fill="#ffc658" />
-    </BarChart>
-  </Container>
+    <Container>
+        <BarChart data={mixData} margin={{top: 20,right: 30,left: 20,bottom: 5,}}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="female" stackId="a" fill="#8884d8" />
+            <Bar dataKey="male" stackId="a" fill="#82ca9d" />
+            <Bar dataKey="uv" fill="#ffc658" />
+        </BarChart>
+    </Container>
 )
 
 // CustomShapeBarChart
 const getPath = (x, y, width, height) => {
-  return `M${x},${y + height}
-        C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${x + width / 2}, ${y}
-        C${x + width / 2},${y + height / 3} ${x + 2 * width / 3},${y + height} ${x + width}, ${y + height}
-        Z`
+    return `M${x},
+    ${y + height}C${x + width / 3},
+    ${y + height} ${x + width / 2},
+    ${y + height / 3}${x + width / 2},
+    ${y}C${x + width / 2},
+    ${y + height / 3} ${x + 2 * width / 3},
+    ${y + height} ${x + width},
+    ${y + height}Z`
 }
 
 const TriangleBar = (props) => {
-  const { fill, x, y, width, height } = props
-  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />
+    const { fill, x, y, width, height } = props
+    return
+        <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />
 }
 
 TriangleBar.propTypes = {
-  fill: PropTypes.string,
-  x: PropTypes.number,
-  y: PropTypes.number,
-  width: PropTypes.number,
-  height: PropTypes.number,
+    fill: PropTypes.string,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
 }
 
 const CustomShapeBarChart = () => (
-  <Container>
-    <BarChart data={mixData} margin={{
-      top: 20,
-      right: 30,
-      left: 20,
-      bottom: 5,
-    }}>
-      <XAxis dataKey="name" />
-      <YAxis />
-      <CartesianGrid strokeDasharray="3 3" />
-      <Bar dataKey="female" fill="#8884d8" shape={< TriangleBar />} label />
-    </BarChart>
-  </Container>
+    <Container>
+        <BarChart data={mixData} margin={{top: 20,right: 30,left: 20,bottom: 5,}}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Bar dataKey="female" fill="#8884d8" shape={< TriangleBar />} label />
+        </BarChart>
+    </Container>
 )
 
 const EditorPage = () => (
-  <div className="content-inner">
-    <Button type="primary" size="large" style={{
-      position: 'absolute',
-      right: 0,
-      top: -48,
-    }}>
-      <a href="http://recharts.org/#/en-US/examples/TinyBarChart" target="blank">Show More</a>
-    </Button>
-    <Row gutter={32}>
-      <Col {...colProps}>
-        <Card title="SimpleBarChart">
-          <SimpleBarChart />
-        </Card>
-      </Col>
-      <Col {...colProps}>
-        <Card title="StackedBarChart">
-          <StackedBarChart />
-        </Card>
-      </Col>
-      <Col {...colProps}>
-        <Card title="MixBarChart">
-          <MixBarChart />
-        </Card>
-      </Col>
-      <Col {...colProps}>
-        <Card title="CustomShapeBarChart">
-          <CustomShapeBarChart />
-        </Card>
-      </Col>
-    </Row>
-  </div>
+    <div className="content-inner">
+        <Button type="primary" size="large" style={{position: 'absolute',right: 0,top: -48,}}>
+            <a href="http://recharts.org/#/en-US/examples/TinyBarChart" target="blank">Show More</a>
+        </Button>
+        <Row gutter={32}>
+            <Col {...colProps}>
+                <Card title="SimpleBarChart">
+                    <SimpleBarChart />
+                </Card>
+            </Col>
+            <Col {...colProps}>
+                <Card title="StackedBarChart">
+                    <StackedBarChart />
+                </Card>
+            </Col>
+            <Col {...colProps}>
+                <Card title="MixBarChart">
+                    <MixBarChart />
+                </Card>
+            </Col>
+            <Col {...colProps}>
+                <Card title="CustomShapeBarChart">
+                    <CustomShapeBarChart />
+                </Card>
+            </Col>
+        </Row>
+    </div>
 )
 
 export default EditorPage

@@ -7,9 +7,7 @@ export default {
 		loginLoading: false
 	},
 	effects : {
-		*login({
-			payload
-		}, {put, call}) {
+		*login({payload}, {put, call}) {
 			yield put({type: 'showLoginLoading'})
 			const data = yield call(login, payload)
 			yield put({type: 'hideLoginLoading'})
