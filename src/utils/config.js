@@ -13,7 +13,7 @@ module.exports = {
 		userLogin: '/user/login',
 		userLogout: '/user/logout',
 		userInfo: '/user/isLogin',
-		users: '/users',
+		users: '/user/getUserList',
 		dashboard: '/user/getManageArea'
 	}
 }

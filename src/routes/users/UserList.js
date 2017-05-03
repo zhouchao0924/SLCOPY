@@ -5,9 +5,7 @@ import classnames from 'classnames'
 import AnimTableBody from '../../components/DataTable/AnimTableBody'
 import { DropOption } from '../../components'
 
-
 const confirm = Modal.confirm;
-
 function list ({ loading, dataSource, pagination, onPageChange, onDeleteItem, onEditItem, isMotion, location }) {
     const handleMenuClick = (record, e) => {
         if (e.key === '1') {

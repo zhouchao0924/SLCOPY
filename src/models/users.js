@@ -32,8 +32,8 @@ export default {
 				yield put({
 					type: 'querySuccess',
 					payload: {
-						list: data.data,
-						pagination: data.page
+						list: data.data.userList,
+						pagination: data.data.page
 					}
 				})
 			}
