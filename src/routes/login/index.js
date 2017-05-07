@@ -1,10 +1,12 @@
-import React, {PropTypes} from 'react'
-import {connect} from 'dva'
-import {Button, Row, Form, Input} from 'antd'
-import {config} from '../../utils'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'dva'
+import { Button, Row, Form, Input } from 'antd'
+import { config } from '../../utils'
 import styles from './index.less'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
+
 const Login = ({login,dispatch,form: {getFieldDecorator,validateFieldsAndScroll}}) => {
 	const {loginLoading} = login;
 	function handleOk() {
@@ -34,9 +36,11 @@ const Login = ({login,dispatch,form: {getFieldDecorator,validateFieldsAndScroll}
 		</div>
 	)
 };
+
 Login.propTypes = {
-	form: PropTypes.object,
-	login: PropTypes.object,
-	dispatch: PropTypes.func
+    form: PropTypes.object,
+    login: PropTypes.object,
+    dispatch: PropTypes.func,
 }
-export default connect(({login}) => ({login}))(Form.create()(Login))
+
+export default connect(({ login }) => ({ login }))(Form.create()(Login))

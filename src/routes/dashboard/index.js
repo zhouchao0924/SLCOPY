@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'dva';
 import {Select, Card, Col, Row, Button} from 'antd';
 import styles from './index.less';

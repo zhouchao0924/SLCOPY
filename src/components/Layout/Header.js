@@ -1,8 +1,11 @@
-import React, {PropTypes} from 'react'
-import {Menu, Icon, Popover} from 'antd'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Menu, Icon, Popover } from 'antd'
 import styles from './Header.less'
 import Menus from './Menu'
+
 const SubMenu = Menu.SubMenu
+
 function Header({user,logout,switchSider,siderFold,isNavbar,menuPopoverVisible,location,switchMenuPopover,navOpenKeys,changeOpenKeys}) {
 	let handleClickMenu = e => e.key === 'logout' && logout()
 	const menusProps = {
@@ -18,9 +21,9 @@ function Header({user,logout,switchSider,siderFold,isNavbar,menuPopoverVisible,l
 		<div className={styles.header}>
 			{isNavbar
 				?<Popover placement="bottomLeft" onVisibleChange={switchMenuPopover} visible={menuPopoverVisible} overlayClassName={styles.popovermenu} trigger="click" content={< Menus {...menusProps}/>}>
-				<div className={styles.button}>
-					<Icon type="bars"/>
-				</div>
+                    <div className={styles.button}>
+                        <Icon type="bars"/>
+                    </div>
 				</Popover>
 				: <div className={styles.button} onClick={switchSider}>
 					<Icon type={siderFold?'menu-unfold':'menu-fold'}/>
