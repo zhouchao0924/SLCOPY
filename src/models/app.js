@@ -33,7 +33,6 @@ export default {
     effects: {
         *isLogin ({ payload,}, { call, put }) {
             const data = yield call(getUserisLogin, parse(payload))
-            console.log(data)
             if (data.success && data.data) {
                 yield put({
                     type: 'querySuccess',
