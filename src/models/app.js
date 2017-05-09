@@ -1,37 +1,42 @@
-import { getUserisLogin, logout } from '../services/app'
+import { query, logout } from '../services/app'
 import { routerRedux } from 'dva/router'
 import { parse } from 'qs'
 import { config } from '../utils'
 const { prefix } = config
 
 export default {
+
     namespace: 'app',
+
     state: {
         user: {},
-        loginButtonLoading: false,
         menuPopoverVisible: false,
         siderFold: localStorage.getItem(`${prefix}siderFold`) === 'true',
         darkTheme: localStorage.getItem(`${prefix}darkTheme`) === 'true',
         isNavbar: document.body.clientWidth < 769,
         navOpenKeys: JSON.parse(localStorage.getItem(`${prefix}navOpenKeys`)) || [],
     },
+
     subscriptions: {
         setup ({ dispatch }) {
-            dispatch({ type: 'queryUser' })
+            dispatch({ type: 'query' })
+            let tid
             window.onresize = () => {
-                dispatch({ type: 'changeNavbar' })
+                clearTimeout(tid)
+                tid = setTimeout(() => {
+                    dispatch({ type: 'changeNavbar' })
+                }, 300)
             }
         },
     },
+
     effects: {
-        *queryUser ({
-            payload,
-        }, { call, put }) {
-            const data = yield call(getUserisLogin, parse(payload))
-            if (data.success && data.data) {
+        *query ({ payload,}, { call, put }) {
+            const data = yield call(query, parse(payload))
+            if (data.success && data.user) {
                 yield put({
-                    type: 'queryUserSuccess',
-                    payload: data.data,
+                    type: 'querySuccess',
+                    payload: data.user,
                 })
                 if (location.pathname === '/login') {
                     yield put(routerRedux.push('/dashboard'))
@@ -46,6 +51,7 @@ export default {
                 }
             }
         },
+
         *logout ({payload,}, { call, put }) {
             const data = yield call(logout, parse(payload))
             if (data.success) {
@@ -54,74 +60,54 @@ export default {
                 throw (data)
             }
         },
-        *switchSider ({payload,}, { put }) {
-            yield put({
-                type: 'handleSwitchSider',
-            })
-        },
-        *changeTheme ({payload,}, { put }) {
-            yield put({
-                type: 'handleChangeTheme',
-            })
-        },
-        *changeNavbar ({payload,}, { put }) {
-            if (document.body.clientWidth < 769) {
-                yield put({ type: 'showNavbar' })
-            } else {
-                yield put({ type: 'hideNavbar' })
+
+        *changeNavbar ({payload,}, { put, select }) {
+            const { app } = yield(select(_ => _))
+            const isNavbar = document.body.clientWidth < 769
+            if (isNavbar !== app.isNavbar) {
+                yield put({ type: 'handleNavbar', payload: isNavbar })
             }
         },
-        *switchMenuPopver ({payload,}, { put }) {
-            yield put({
-                type: 'handleSwitchMenuPopver',
-            })
-        },
     },
+
     reducers: {
-        queryUserSuccess (state, { payload: user }) {
+        querySuccess (state, { payload: user }) {
             return {
                 ...state,
                 user,
             }
         },
-        showLoginButtonLoading (state) {
-            return {
-                ...state,
-                loginButtonLoading: true,
-            }
-        },
-        handleSwitchSider (state) {
+
+        switchSider (state) {
             localStorage.setItem(`${prefix}siderFold`, !state.siderFold)
             return {
                 ...state,
                 siderFold: !state.siderFold,
             }
         },
-        handleChangeTheme (state) {
+
+        switchTheme (state) {
             localStorage.setItem(`${prefix}darkTheme`, !state.darkTheme)
             return {
                 ...state,
                 darkTheme: !state.darkTheme,
             }
         },
-        showNavbar (state) {
-            return {
-                ...state,
-                isNavbar: true,
-            }
-        },
-        hideNavbar (state) {
-            return {
-                ...state,
-                isNavbar: false,
-            }
-        },
-        handleSwitchMenuPopver (state) {
+
+        switchMenuPopver (state) {
             return {
                 ...state,
                 menuPopoverVisible: !state.menuPopoverVisible,
             }
         },
+
+        handleNavbar (state, { payload }) {
+            return {
+                ...state,
+                isNavbar: payload,
+            }
+        },
+
         handleNavOpenKeys (state, { payload: navOpenKeys }) {
             return {
                 ...state,
