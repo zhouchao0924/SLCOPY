@@ -1,4 +1,4 @@
-import { query, logout } from '../services/app'
+import { logout, getUserisLogin } from '../services/app'
 import { routerRedux } from 'dva/router'
 import { parse } from 'qs'
 import { config } from '../utils'
@@ -19,7 +19,7 @@ export default {
 
     subscriptions: {
         setup ({ dispatch }) {
-            dispatch({ type: 'query' })
+            dispatch({ type: 'isLogin' })
             let tid
             window.onresize = () => {
                 clearTimeout(tid)
@@ -31,12 +31,13 @@ export default {
     },
 
     effects: {
-        *query ({ payload,}, { call, put }) {
-            const data = yield call(query, parse(payload))
-            if (data.success && data.user) {
+        *isLogin ({ payload,}, { call, put }) {
+            const data = yield call(getUserisLogin, parse(payload))
+            console.log(data)
+            if (data.success && data.data) {
                 yield put({
                     type: 'querySuccess',
-                    payload: data.user,
+                    payload: data.data,
                 })
                 if (location.pathname === '/login') {
                     yield put(routerRedux.push('/dashboard'))
@@ -55,7 +56,7 @@ export default {
         *logout ({payload,}, { call, put }) {
             const data = yield call(logout, parse(payload))
             if (data.success) {
-                yield put({ type: 'queryUser' })
+                yield put(routerRedux.push('/login'))
             } else {
                 throw (data)
             }

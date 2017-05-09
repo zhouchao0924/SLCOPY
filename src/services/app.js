@@ -21,11 +21,11 @@ export async function logout (params) {
 export async function getUserisLogin(params) {
 	return request({url: userisLogin, method: 'get', data: params})
 }
-
-export async function query (params) {
-    return request({
-        url: user.replace('/:id', ''),
-        method: 'get',
-        data: params,
-    })
-}
+//可以用来获取权限
+// export async function query (params) {
+//     return request({
+//         url: user.replace('/:id', ''),
+//         method: 'get',
+//         data: params,
+//     })
+// }
