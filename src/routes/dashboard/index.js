@@ -1,8 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'dva';
-import {Select, Card, Col, Row, Button} from 'antd';
-import styles from './index.less';
+import { connect } from 'dva'
+import { Row, Col, Card, Button} from 'antd'
+import { NumberCard, Quote, Sales, Weather, RecentSales, Comments, Completed, Browser, Cpu, User } from './components'
+import styles from './index.less'
+import { color } from '../../utils'
+
+const bodyStyle = {
+  bodyStyle: {
+    height: 432,
+    background: '#fff',
+  },
+}
 
 function Dashboard({dashboard}) {
 	const ToYYTown = (e) => {
@@ -21,7 +30,9 @@ function Dashboard({dashboard}) {
 		</div>
 	);
 };
+
 Dashboard.propTypes = {
-	dashboard: PropTypes.object
-};
-export default connect(({dashboard}) => ({dashboard}))(Dashboard);
+  dashboard: PropTypes.object,
+}
+
+export default connect(({ dashboard }) => ({ dashboard }))(Dashboard)
