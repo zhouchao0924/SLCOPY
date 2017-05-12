@@ -9,12 +9,12 @@ import * as Layout from './Layout/index.js'
 import layer from './layer'
 
 export {
-  Layout,
-  DataTable,
-  DropOption,
-  Iconfont,
-  Search,
-  Editor,
-  FilterItem,
-  layer,
+    Layout,
+    DataTable,
+    DropOption,
+    Iconfont,
+    Search,
+    Editor,
+    FilterItem,
+    layer,
  }

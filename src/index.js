@@ -7,13 +7,13 @@ import { message } from 'antd'
 
 // 1. Initialize
 const app = dva({
-  ...createLoading({
-    effects: true,
-  }),
-  history: browserHistory,
-  onError (error) {
-    message.error(error.message)
-  },
+    ...createLoading({
+        effects: true,
+    }),
+    history: browserHistory,
+    onError (error) {
+        message.error(error.message)
+    },
 })
 
 // 2. Model
