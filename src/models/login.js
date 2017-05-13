@@ -1,22 +1,24 @@
-import { login } from '../services/login'
-import { routerRedux } from 'dva/router'
-import { queryURL } from '../utils'
+import {login} from '../services/login'
+import {routerRedux} from 'dva/router'
+import {queryURL} from '../utils'
 
 export default {
-    namespace: 'login',
+    namespace : 'login',
 
-    state: {
-        loginLoading: false,
+    state : {
+        loginLoading: false
     },
 
-    effects: {
-        *login ({ payload, }, { put, call }) {
-            yield put({ type: 'showLoginLoading' })
+    effects : {
+        *login({
+            payload
+        }, {put, call}) {
+            yield put({type: 'showLoginLoading'})
             const data = yield call(login, payload)
-            yield put({ type: 'hideLoginLoading' })
+            yield put({type: 'hideLoginLoading'})
             if (data.success) {
                 const from = queryURL('from')
-                yield put({ type: 'app/query' })
+                yield put({type: 'app/query'})
                 if (from) {
                     yield put(routerRedux.push(from))
                 } else {
@@ -25,21 +27,21 @@ export default {
             } else {
                 throw data
             }
-        },
+        }
     },
 
-    reducers: {
-        showLoginLoading (state) {
+    reducers : {
+        showLoginLoading(state) {
             return {
                 ...state,
-                loginLoading: true,
+                loginLoading: true
             }
         },
-        hideLoginLoading (state) {
+        hideLoginLoading(state) {
             return {
                 ...state,
-                loginLoading: false,
+                loginLoading: false
             }
-        },
-    },
+        }
+    }
 }

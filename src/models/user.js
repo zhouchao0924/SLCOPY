@@ -1,12 +1,12 @@
-import { create, remove, update } from '../services/user'
-import { query } from '../services/users'
-import { parse } from 'qs'
+import {create, remove, update} from '../services/user'
+import {query} from '../services/users'
+import {parse} from 'qs'
 
 export default {
 
-    namespace: 'user',
+    namespace : 'user',
 
-    state: {
+    state : {
         list: [],
         currentItem: {},
         modalVisible: false,
@@ -17,25 +17,24 @@ export default {
             showQuickJumper: true,
             showTotal: total => `共 ${total} 条`,
             current: 1,
-            total: null,
-        },
+            total: null
+        }
     },
 
-    subscriptions: {
-        setup ({ dispatch, history }) {
+    subscriptions : {
+        setup({dispatch, history}) {
             history.listen(location => {
                 if (location.pathname === '/user') {
-                    dispatch({
-                        type: 'query',
-                        payload: location.query,
-                    })
+                    dispatch({type: 'query', payload: location.query})
                 }
             })
-        },
+        }
     },
 
-    effects: {
-        *query ({ payload }, { call, put }) {
+    effects : {
+        *query({
+            payload
+        }, {call, put}) {
             payload = parse(location.search.substr(1))
             const data = yield call(query, payload)
             if (data) {
@@ -46,68 +45,85 @@ export default {
                         pagination: {
                             current: Number(payload.page) || 1,
                             pageSize: Number(payload.pageSize) || 10,
-                            total: data.total,
-                        },
-                    },
+                            total: data.total
+                        }
+                    }
                 })
             }
-        },
-
-        *'delete' ({ payload }, { call, put }) {
-            const data = yield call(remove, { id: payload })
-            if (data.success) {
-                yield put({ type: 'query' })
+        }, * 'delete' ({
+            payload
+        }, {call, put}) {
+            const data = yield call(remove, {id: payload})if (data.success) {
+                yield put({type: 'query'})
             } else {
                 throw data
             }
         },
 
-        *create ({ payload }, { call, put }) {
+        *create({
+            payload
+        }, {call, put}) {
             const data = yield call(create, payload)
             if (data.success) {
-                yield put({ type: 'hideModal' })
-                yield put({ type: 'query' })
+                yield put({type: 'hideModal'})
+                yield put({type: 'query'})
             } else {
                 throw data
             }
         },
 
-        *update ({ payload }, { select, call, put }) {
-            const id = yield select(({ user }) => user.currentItem.id)
-            const newUser = { ...payload, id }
+        *update({
+            payload
+        }, {select, call, put}) {
+            const id = yield select(({user}) => user.currentItem.id)
+            const newUser = {
+                ...payload,
+                id
+            }
             const data = yield call(update, newUser)
             if (data.success) {
-                yield put({ type: 'hideModal' })
-                yield put({ type: 'query' })
+                yield put({type: 'hideModal'})
+                yield put({type: 'query'})
             } else {
                 throw data
             }
-        },
+        }
     },
 
-    reducers: {
-        querySuccess (state, action) {
-            const { list, pagination } = action.payload
-            return { ...state,
+    reducers : {
+        querySuccess(state, action) {
+            const {list, pagination} = action.payload
+            return {
+                ...state,
                 list,
                 pagination: {
                     ...state.pagination,
-                    ...pagination,
+                    ...pagination
                 }
             }
         },
 
-        showModal (state, action) {
-            return { ...state, ...action.payload, modalVisible: true }
+        showModal(state, action) {
+            return {
+                ...state,
+                ...action.payload,
+                modalVisible: true
+            }
         },
 
-        hideModal (state) {
-            return { ...state, modalVisible: false }
+        hideModal(state) {
+            return {
+                ...state,
+                modalVisible: false
+            }
         },
 
-        switchIsMotion (state) {
+        switchIsMotion(state) {
             localStorage.setItem('antdAdminUserIsMotion', !state.isMotion)
-            return { ...state, isMotion: !state.isMotion }
-        },
-    },
+            return {
+                ...state,
+                isMotion: !state.isMotion
+            }
+        }
+    }
 }
