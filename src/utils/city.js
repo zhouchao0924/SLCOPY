@@ -1,4 +1,3 @@
-
 /*
     ## Address 字典数据
     字典数据来源 http://www.atatech.org/articles/30028?rnd=254259856
@@ -4018,7 +4017,7 @@ let DICT = {
   820100: '澳门半岛',
   820200: '离岛',
   990000: '海外',
-  990100: '海外',
+  990100: '海外'
 }
 
 // id pid/parentId name children
@@ -4027,7 +4026,8 @@ const tree = (list) => {
   let item
   for (let i = 0; i < list.length; i++) {
     item = list[i]
-    if (!item || !item.id) continue
+    if (!item || !item.id) 
+      continue
     mapped[item.id] = item
   }
 
@@ -4035,16 +4035,21 @@ const tree = (list) => {
   for (let ii = 0; ii < list.length; ii++) {
     item = list[ii]
 
-    if (!item) continue
-            /* jshint -W041 */
+    if (!item) 
+      continue
+    /* jshint -W041 */
     if (item.pid === undefined && item.parentId === undefined) {
       result.push(item)
       continue
     }
     let parent = mapped[item.pid] || mapped[item.parentId]
-    if (!parent) continue
-    if (!parent.children) parent.children = []
-    parent.children.push(item)
+    if (!parent) 
+      continue
+    if (!parent.children) 
+      parent.children = []
+    parent
+      .children
+      .push(item)
   }
   return result
 }
@@ -4055,16 +4060,11 @@ let DICT_FIXED = (function () {
     if ({}.hasOwnProperty.call(DICT, id)) {
       let pid
       if (id.slice(2, 6) !== '0000') {
-        pid = id.slice(4, 6) === '00' ? (`${id.slice(0, 2)}0000`) :
-        `${id.slice(0, 4)}00`
+        pid = id.slice(4, 6) === '00'
+          ? (`${id.slice(0, 2)}0000`)
+          : `${id.slice(0, 4)}00`
       }
-      fixed.push({
-        id,
-        pid,
-        name: DICT[id],
-        value: DICT[id],
-        label: DICT[id],
-      })
+      fixed.push({id, pid, name: DICT[id], value: DICT[id], label: DICT[id]})
     }
   }
   return tree(fixed)
