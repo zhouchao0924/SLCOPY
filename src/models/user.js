@@ -32,7 +32,7 @@ export default {
     },
 
     effects : {
-        *query({
+        * query({
             payload
         }, {call, put}) {
             payload = parse(location.search.substr(1))
@@ -50,17 +50,19 @@ export default {
                     }
                 })
             }
-        }, * 'delete' ({
+        },
+        * 'delete' ({
             payload
         }, {call, put}) {
-            const data = yield call(remove, {id: payload})if (data.success) {
+            const data = yield call(remove, {id: payload});
+            if (data.success) {
                 yield put({type: 'query'})
             } else {
                 throw data
             }
         },
 
-        *create({
+        * create({
             payload
         }, {call, put}) {
             const data = yield call(create, payload)
@@ -72,7 +74,7 @@ export default {
             }
         },
 
-        *update({
+        * update({
             payload
         }, {select, call, put}) {
             const id = yield select(({user}) => user.currentItem.id)
