@@ -31,8 +31,8 @@ export default {
 
   effects: {
     *getUserisLogin ({
-            payload,
-        }, { call, put }) {
+      payload,
+    }, { call, put }) {
       const data = yield call(getUserisLogin, parse(payload))
       if (data.success && data.data) {
         yield put({ type: 'querySuccess', payload: data.data })
@@ -51,8 +51,8 @@ export default {
     },
 
     *logout ({
-            payload,
-        }, { call, put }) {
+      payload,
+    }, { call, put }) {
       const data = yield call(logout, parse(payload))
       if (data.success) {
         yield put(routerRedux.push('/login'))
@@ -62,9 +62,9 @@ export default {
     },
 
     *changeNavbar ({
-            payload,
-        }, { put, select }) {
-      const { app } = yield (select(_ => _))
+      payload,
+    }, { put, select }) {
+      const { app } = yield(select(_ => _))
       const isNavbar = document.body.clientWidth < 769
       if (isNavbar !== app.isNavbar) {
         yield put({ type: 'handleNavbar', payload: isNavbar })

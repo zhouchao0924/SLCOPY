@@ -15,8 +15,8 @@ export default {
 
   effects: {
     *query ({
-            payload,
-        }, { call, put }) {
+      payload,
+    }, { call, put }) {
       const data = yield call(query, parse(payload))
       console.log(data)
       if (data) {

@@ -11,8 +11,8 @@ export default {
 
   effects: {
     *login ({
-            payload,
-        }, { put, call }) {
+      payload,
+    }, { put, call }) {
       yield put({ type: 'showLoginLoading' })
       const data = yield call(login, payload)
       yield put({ type: 'hideLoginLoading' })
