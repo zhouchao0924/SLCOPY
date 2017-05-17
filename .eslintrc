@@ -1,11 +1,11 @@
 {
   "extends": "airbnb",
   "rules": {
-    "semi": [2, "never"],
+    "semi": [2, "always"],
     "no-console": 0,
-    "comma-dangle": [2, "always-multiline"],
+    "comma-dangle": [2, "never"],
     "max-len": 0,
-    "react/jsx-first-prop-new-line": 0,
+    "react/jsx-first-prop-new-line": [2,"multiline"],
     "space-before-function-paren": [2, "always"],
     "no-unused-expressions": [0, {
       "allowShortCircuit": true,

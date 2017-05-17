@@ -50,7 +50,8 @@ export default {
           },
         })
       }
-    }, * 'delete' ({
+    },
+    * del ({
       payload,
     }, { call, put }) {
       const data = yield call(remove, { id: payload })

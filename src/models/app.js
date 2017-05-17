@@ -71,6 +71,7 @@ export default {
       }
     },
   },
+
   reducers: {
     querySuccess (state, { payload: user }) {
       return {
