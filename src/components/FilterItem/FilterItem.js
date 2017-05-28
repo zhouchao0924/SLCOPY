@@ -1,30 +1,30 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styles from './FilterItem.less'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './FilterItem.less';
 
 const FilterItem = ({
     label = '',
-    children,
+    children
 }) => {
-    const labelArray = label.split('')
+    const labelArray = label.split('');
     return (
         <div className={styles.filterItem}>
             {labelArray.length > 0
                 ? <div className={styles.labelWrap}>
-                    {labelArray.map((item, index) => <span className="labelText" key={index}>{item}</span>)}
-                </div>
+                        {labelArray.map((item, index) => <span className="labelText" key={index}>{item}</span>)}
+                    </div>
                 : ''
-            }
+}
             <div className={styles.item}>
                 {children}
             </div>
         </div>
-    )
-}
+    );
+};
 
 FilterItem.propTypes = {
     label: PropTypes.string,
-    children: PropTypes.element.isRequired,
-}
+    children: PropTypes.element.isRequired
+};
 
-export default FilterItem
+export default FilterItem;

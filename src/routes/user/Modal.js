@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Form,
     Input,
@@ -7,10 +7,10 @@ import {
     Radio,
     Modal,
     Cascader
-} from 'antd'
-import city from '../../utils/city'
+} from 'antd';
+import city from '../../utils/city';
 
-const FormItem = Form.Item
+const FormItem = Form.Item;
 
 const formItemLayout = {
     labelCol: {
@@ -19,7 +19,7 @@ const formItemLayout = {
     wrapperCol: {
         span: 14
     }
-}
+};
 
 const modal = ({
     item = {},
@@ -34,23 +34,23 @@ const modal = ({
     const handleOk = () => {
         validateFields((errors) => {
             if (errors) {
-                return
+                return;
             }
             const data = {
                 ...getFieldsValue(),
                 key: item.key
-            }
+            };
             data.address = data
                 .address
-                .join(' ')
-            onOk(data)
-        })
-    }
+                .join(' ');
+            onOk(data);
+        });
+    };
 
     const modalOpts = {
         ...modalProps,
         onOk: handleOk
-    }
+    };
 
     return (
         <Modal {...modalOpts}>
@@ -63,7 +63,7 @@ const modal = ({
                                 required: true
                             }
                         ]
-                    })(<Input/>)}
+                    })(<Input />)}
                 </FormItem>
                 <FormItem label="NickName" hasFeedback {...formItemLayout}>
                     {getFieldDecorator('nickName', {
@@ -73,7 +73,7 @@ const modal = ({
                                 required: true
                             }
                         ]
-                    })(<Input/>)}
+                    })(<Input />)}
                 </FormItem>
                 <FormItem label="Gender" hasFeedback {...formItemLayout}>
                     {getFieldDecorator('isMale', {
@@ -100,7 +100,7 @@ const modal = ({
                                 type: 'number'
                             }
                         ]
-                    })(<InputNumber min={18} max={100}/>)}
+                    })(<InputNumber min={18} max={100} />)}
                 </FormItem>
                 <FormItem label="Phone" hasFeedback {...formItemLayout}>
                     {getFieldDecorator('phone', {
@@ -112,7 +112,7 @@ const modal = ({
                                 message: 'The input is not valid phone!'
                             }
                         ]
-                    })(<Input/>)}
+                    })(<Input />)}
                 </FormItem>
                 <FormItem label="E-mail" hasFeedback {...formItemLayout}>
                     {getFieldDecorator('email', {
@@ -124,7 +124,7 @@ const modal = ({
                                 message: 'The input is not valid E-mail!'
                             }
                         ]
-                    })(<Input/>)}
+                    })(<Input />)}
                 </FormItem>
                 <FormItem label="Address" hasFeedback {...formItemLayout}>
                     {getFieldDecorator('address', {
@@ -137,23 +137,24 @@ const modal = ({
                             }
                         ]
                     })(<Cascader
-                        size="large"
-                        style={{
-                        width: '100%'
-                    }}
-                        options={city}
-                        placeholder="Pick an address"/>)}
+                      size="large"
+                      style={{
+                            width: '100%'
+                        }}
+                      options={city}
+                      placeholder="Pick an address" 
+                    />)}
                 </FormItem>
             </Form>
         </Modal>
-    )
-}
+    );
+};
 
 modal.propTypes = {
     form: PropTypes.object.isRequired,
     type: PropTypes.string,
     item: PropTypes.object,
     onOk: PropTypes.func
-}
+};
 
-export default Form.create()(modal)
+export default Form.create()(modal);

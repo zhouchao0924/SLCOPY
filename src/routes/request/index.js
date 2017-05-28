@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.less';
 import Mock from 'mockjs';
-import {request, config} from '../../utils';
+import { request, config } from '../../utils';
 import {
     Row,
     Col,
@@ -10,8 +10,8 @@ import {
     Input,
     Button
 } from 'antd';
-const {api, baseURL} = config;
-const {dashboard, users, userLogin, user} = api;
+const { api, baseURL } = config;
+const { dashboard, users, userLogin, user } = api;
 const requestOptions = [
     {
         url: baseURL + user.replace('/:id', ''),
@@ -33,7 +33,7 @@ const requestOptions = [
     }, {
         url: baseURL + user,
         desc: 'intercept request by mock.js',
-        data: Mock.mock({id: '@id'})
+        data: Mock.mock({ id: '@id' })
     }, {
         url: baseURL + user.replace('/:id', ''),
         desc: 'intercept request by mock.js',
@@ -56,12 +56,12 @@ const requestOptions = [
         url: baseURL + user,
         desc: 'intercept request by mock.js',
         method: 'patch',
-        data: Mock.mock({id: '@id', name: '@cname'})
+        data: Mock.mock({ id: '@id', name: '@cname' })
     }, {
         url: baseURL + user,
         desc: 'intercept request by mock.js',
         method: 'delete',
-        data: Mock.mock({id: '@id'})
+        data: Mock.mock({ id: '@id' })
     }, {
         url: `${baseURL}/test`,
         desc: 'intercept request by mock.js',
@@ -90,7 +90,7 @@ export default class RequestPage extends React.Component {
         this.handleRequest();
     }
     handleRequest = () => {
-        const {currntRequest} = this.state;
+        const { currntRequest } = this.state;
         const {
             desc,
             ...requestParams
@@ -98,12 +98,12 @@ export default class RequestPage extends React.Component {
         this.setState({
             ...this.state,
             result: <div key="sending">
-                    请求中<br/>
-                    url:{currntRequest.url}<br/>
-                    method:{currntRequest.method}<br/>
+                    请求中<br />
+                    url:{currntRequest.url}<br />
+                    method:{currntRequest.method}<br />
                     params:{currntRequest.data
                         ? JSON.stringify(currntRequest.data)
-                        : 'null'}<br/>
+                        : 'null'}<br />
                 </div>
         });
         request({
@@ -111,7 +111,7 @@ export default class RequestPage extends React.Component {
         }).then((data) => {
             const state = this.state;
             state.result = [
-                this.state.result, < div key = "complete" > <div>请求完成</div>
+                this.state.result, < div key ="complete" > <div>请求完成</div>
                     {
                     JSON.stringify(data)
                 } < /div>];
@@ -120,26 +120,26 @@ export default class RequestPage extends React.Component {
     }
 
     handeleURLChange = (value) => {
-      const state = this.state;
-      const curretUrl = value.split('?')[0];
-      const curretMethod = value.split('?')[1];
-      const currntItem = requestOptions.filter(item => {
-        const { method = 'get' } = item;
-        return curretUrl === item.url && curretMethod === method;
-    });
-      state.currntRequest = currntItem[0];
-      this.setState(state);
-  }
+        const state = this.state;
+        const curretUrl = value.split('?')[0];
+        const curretMethod = value.split('?')[1];
+        const currntItem = requestOptions.filter(item => {
+            const { method = 'get' } = item;
+            return curretUrl === item.url && curretMethod === method;
+        });
+        state.currntRequest = currntItem[0];
+        this.setState(state);
+    }
 
     render () {
-      const colProps = {
-        lg: 12,
-        md: 24
-    };
-      const { result, currntRequest } = this.state;
-      const { method = 'get' } = currntRequest;
+        const colProps = {
+            lg: 12,
+            md: 24
+        };
+        const { result, currntRequest } = this.state;
+        const { method = 'get' } = currntRequest;
 
-      return (
+        return (
       <div className="content-inner">
             <Row gutter={32}>
               <Col {...colProps}>
@@ -159,20 +159,20 @@ export default class RequestPage extends React.Component {
                           return (<Select.Option key={index} value={`${item.url}?${m}`}>
                           {`${m.toLocaleUpperCase()}    `}{item.url}
                         </Select.Option >);
-            })
+                      })
         } < /Select>
-                <Button type="primary" style={{ width: 100, marginLeft: 16 }} onClick={this.handleRequest}>发送</Button > </div> < div className = {
+                <Button type="primary" style={{ width: 100, marginLeft: 16 }} onClick={this.handleRequest}>发送</Button > </div> < div className ={
             styles.params
-        } > <div className={styles.label}>Params：</div> < Input disabled value = {
+        } > <div className={styles.label}>Params：</div> < Input disabled value ={
             currntRequest.data
                 ? JSON.stringify(currntRequest.data)
                 : 'null'
         }
-        size = "large" style = {{ width: 200 }}placeholder = "null"
+          size ="large" style ={{ width: 200 }}placeholder ="null"
         /> <div style={{
             flex: 1,
             marginLeft: 16
-        }}>{currntRequest.desc}</div > </div> < div className = {
+        }}>{currntRequest.desc}</div > </div> < div className= {
             styles.result
         } > {
             result
