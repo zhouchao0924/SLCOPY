@@ -64,7 +64,7 @@ export default {
         *changeNavbar({
             payload
         }, { put, select }) {
-            const { app } = yield(select(_ => _));
+            const { app } = yield (select(_ => _));
             const isNavbar = document.body.clientWidth < 769;
             if (isNavbar !== app.isNavbar) {
                 yield put({ type: 'handleNavbar', payload: isNavbar });

@@ -51,7 +51,7 @@ export default {
                 });
             }
         },
-        * del({
+        * 'delete'({
             payload
         }, { call, put }) {
             const data = yield call(remove, { id: payload });
