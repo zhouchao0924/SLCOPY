@@ -27,13 +27,13 @@ const Menus = ({
                 }
                 return (
                     <Menu.SubMenu
-                      key={item.id}
-                      title={< span > {
-                        item.icon && <Icon type={item.icon} />
-                    }
-                    {
-                        (!siderFoldN || menuTree.indexOf(item) < 0) && item.name
-                    } < /span>}
+                        key={item.id}
+                        title={
+                            <span>
+                                {item.icon && <Icon type={item.icon} />}
+                                {(!siderFoldN || menuTree.indexOf(item) < 0) && item.name}
+                            </span>
+                        }
                     >
                         {getMenus(item.children, siderFoldN)}
                     </Menu.SubMenu>
@@ -115,15 +115,15 @@ const Menus = ({
 
     return (
         <Menu
-          {...menuProps}
-          mode={siderFold
-            ? 'vertical'
-            : 'inline'}
-          theme={darkTheme
-            ? 'dark'
-            : 'light'}
-          onClick={handleClickNavMenu}
-          defaultSelectedKeys={defaultSelectedKeys}
+            {...menuProps}
+            mode={siderFold
+                ? 'vertical'
+                : 'inline'}
+            theme={darkTheme
+                ? 'dark'
+                : 'light'}
+            onClick={handleClickNavMenu}
+            defaultSelectedKeys={defaultSelectedKeys}
         >
             {menuItems}
         </Menu>

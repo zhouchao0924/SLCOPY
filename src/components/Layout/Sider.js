@@ -31,14 +31,14 @@ const Sider = ({
             </div>
             <Menus {...menusProps} /> {!siderFold
                 ? <div className={styles.switchtheme}>
-                        <span><Icon type="bulb" />Switch Theme</span>
-                        <Switch
-                          onChange={changeTheme}
-                          defaultChecked={darkTheme}
-                          checkedChildren="Dark"
-                          unCheckedChildren="Light" 
-                        />
-                    </div>
+                    <span><Icon type="bulb" />Switch Theme</span>
+                    <Switch
+                        onChange={changeTheme}
+                        defaultChecked={darkTheme}
+                        checkedChildren="Dark"
+                        unCheckedChildren="Light"
+                    />
+                </div>
                 : ''}
         </div>
     );

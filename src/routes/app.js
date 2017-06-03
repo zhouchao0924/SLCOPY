@@ -81,22 +81,22 @@ const App = ({ children, location, dispatch, app, loading }) => {
                 {iconFontCSS && <link rel="stylesheet" href={iconFontCSS} />}
             </Helmet>
             <div
-              className={classnames(styles.layout, {
+                className={classnames(styles.layout, {
                     [styles.fold]: isNavbar
-                    ? false
-                    : siderFold
+                        ? false
+                        : siderFold
                 }, {
-                [styles.withnavbar]: isNavbar
-            })}
+                        [styles.withnavbar]: isNavbar
+                    })}
             >
                 {!isNavbar
                     ? <aside
-                      className={classnames(styles.sider, {
-                                [styles.light]: !darkTheme
-                            })}
+                        className={classnames(styles.sider, {
+                            [styles.light]: !darkTheme
+                        })}
                     >
-                            <Sider {...siderProps} />
-                        </aside>
+                        <Sider {...siderProps} />
+                    </aside>
                     : ''}
                 <div className={styles.main}>
                     <Header {...headerProps} />
