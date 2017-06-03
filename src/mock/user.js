@@ -22,6 +22,7 @@ let usersListData = Mock.mock({
   ],
 })
 
+
 let database = usersListData.data
 
 const userPermission = {
@@ -78,6 +79,7 @@ const NOTFOUND = {
 }
 
 module.exports = {
+
   [`POST ${apiPrefix}/user/login`] (req, res) {
     const { username, password } = req.body
     const user = adminUsers.filter((item) => item.username === username)
@@ -160,6 +162,13 @@ module.exports = {
       total: newData.length,
     })
   },
+
+  [`DELETE ${apiPrefix}/users`] (req, res) {
+    const { ids } = req.body
+    database = database.filter((item) => !ids.some(_ => _ === item.id))
+    res.status(204).end()
+  },
+
 
   [`POST ${apiPrefix}/user`] (req, res) {
     const newData = req.body
